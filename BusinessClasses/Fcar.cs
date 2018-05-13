@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,22 @@ namespace ConsoleApp1
 
         public Fcar() : base()
         {
+            base.typeCar = "грузовик";
             mas = 2000;
             cc = 800;
         }
 
-        public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
+        public Fcar(int mas, int cc, float vdvig, int kpos, string typeCar) : base(vdvig, kpos, typeCar)
         {
             this.mas = mas;
             this.cc = cc;
+        }
+
+        public override void Serialize(SqlDataReader reader)
+        {
+            base.Serialize(reader);
+            mas = (int)reader.GetValue(3);
+            cc = (int)reader.GetValue(4);
         }
 
         public override string str()

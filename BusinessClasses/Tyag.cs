@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    [Serializable]
     class Tyag : Fcar
     {
         int kPr { get; set; }
@@ -19,13 +21,21 @@ namespace ConsoleApp1
 
         public Tyag() : base()
         {
+            base.typeCar = "тягач";
             kPr = 1;
             typeDv = "дизель";
         }
-        public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo) : base(mas, cc, vdvig, kpo)
+        public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo, string typeCar) : base(mas, cc, vdvig, kpo, typeCar)
         {
             this.kPr = kPr;
             this.typeDv = typeDv;
+        }
+
+        public override void Serialize(SqlDataReader reader)
+        {
+            base.Serialize(reader);
+            kPr = (int)reader.GetValue(7);
+            typeDv = (string)reader.GetValue(8);
         }
 
         public override string str()
