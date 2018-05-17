@@ -5,11 +5,11 @@ namespace ConsoleApp1
     class Fcar : Car
     {
         /// <summary>
-        /// грузоподъемность
-        /// </summary>
-        int mas { get; set; }
-        /// <summary>
         /// масса авто
+        /// </summary>
+        int mas { get; set; } 
+        /// <summary>
+        /// грузоподъемность
         /// </summary>
         int cc { get; set; }     
 
