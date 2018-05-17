@@ -4,23 +4,24 @@ namespace ConsoleApp1
 {
     class Lcar : Car
     {
-        float ras { get; set; }
         /// <summary>
         /// расход
         /// </summary>
-        int Mspeed { get; set; }
+        float ras { get; set; }
         /// <summary>
         /// макс скорость
         /// </summary>
+        int Mspeed { get; set; }      
 
         public Lcar() : base()
         {
-            base.typeCar = "легковая";
+            tc = typeCar.легковая;
             ras = 20;
             Mspeed = 120;
         }
-        public Lcar(float ras, int Mspeed, float vdvig, int kpo, string typeCar) : base(vdvig, kpo, typeCar)
+        public Lcar(float ras, int Mspeed, float vdvig, int kpo) : base(vdvig, kpo)
         {
+            tc = typeCar.легковая;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }
@@ -28,8 +29,8 @@ namespace ConsoleApp1
         public override void Serialize (SqlDataReader reader)
         {
             base.Serialize(reader);
-            ras = (float)(double)reader.GetValue(5);
-            Mspeed = (int)reader.GetValue(6);
+            ras = (float)(double)reader["расход"];
+            Mspeed = (int)reader["макс_скор"];
         }
 
         public override string str()

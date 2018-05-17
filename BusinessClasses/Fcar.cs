@@ -4,24 +4,25 @@ namespace ConsoleApp1
 {
     class Fcar : Car
     {
+        /// <summary>
+        /// грузоподъемность
+        /// </summary>
         int mas { get; set; }
         /// <summary>
         /// масса авто
         /// </summary>
-        int cc { get; set; }
-        /// <summary>
-        /// грузоподъемность
-        /// </summary>
+        int cc { get; set; }     
 
         public Fcar() : base()
         {
-            base.typeCar = "грузовик";
+            tc = typeCar.грузовик;
             mas = 2000;
             cc = 800;
         }
 
-        public Fcar(int mas, int cc, float vdvig, int kpos, string typeCar) : base(vdvig, kpos, typeCar)
+        public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
         {
+            tc = typeCar.грузовик;
             this.mas = mas;
             this.cc = cc;
         }
@@ -29,8 +30,8 @@ namespace ConsoleApp1
         public override void Serialize(SqlDataReader reader)
         {
             base.Serialize(reader);
-            mas = (int)reader.GetValue(3);
-            cc = (int)reader.GetValue(4);
+            mas = (int)reader["масса_авто"];
+            cc = (int)reader["грузоподъемность"];
         }
 
         public override string str()

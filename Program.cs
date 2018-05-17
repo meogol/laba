@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using ConsoleApp1;
@@ -7,92 +8,84 @@ namespace ConsoleApp3
 {
     class Program
     {
-
-
         static void Main(string[] args)
         {
-
-            SqlConnection con = new SqlConnection();
-
-            con.ConnectionString = @"server=(local); database=cars; integrated security=true";
-
-            string sqlExpression = "SELECT * FROM car";
-
-            var ListCar = new List<Car>() {
-                new Car(),
-                new Fcar(),
-                new Tyag(1,"2",3,4,5,6, "тягач"),
-                new Lcar(1,45,12,35, "легковая")
-            };
-
-            foreach (Car n in ListCar)
-            {
-                string ss = n.str();
-                Console.WriteLine(ss);
-            }
-
             var ListBdCar = new List<Car>();
 
-            try
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString))
             {
-
-                con.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, con);
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                try
                 {
-                    int i = 0;
-                    while (reader.Read())
+                    con.Open();
+                    string sqlExpression = "SELECT * FROM car";
+                    using (SqlCommand command = new SqlCommand(sqlExpression, con))
                     {
 
-                        string strok = (string)reader.GetValue(9);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            int i = 0;
+                            while (reader.Read())
+                            {
+                                string strok = reader["тип_машины"].ToString();
 
-                        if (reader.GetValue(9).ToString().Contains("машина"))
-                        {
-                            ListBdCar.Add(new Car());
-                            ListBdCar[i].Serialize(reader);
+                                if (strok == "машина")
+                                {
+                                    ListBdCar.Add(new Car());
+                                    ListBdCar[i].Serialize(reader);
+                                }
+                                else if (strok == "грузовик")
+                                {
+                                    ListBdCar.Add(new Fcar());
+                                    ListBdCar[i].Serialize(reader);
+                                }
+                                else if (strok == "легковая")
+                                {
+                                    ListBdCar.Add(new Lcar());
+                                    ListBdCar[i].Serialize(reader);
+                                }
+                                else if (strok == ("тягач"))
+                                {
+                                    ListBdCar.Add(new Tyag());
+                                    ListBdCar[i].Serialize(reader);
+                                }
+                                i++;
+                            }
+                            reader.Close();
                         }
-                        else if (reader.GetValue(9).ToString().Contains("грузовик"))
-                        {
-                            ListBdCar.Add(new Fcar());
-                            ListBdCar[i].Serialize(reader);
-                        }
-                        else if (reader.GetValue(9).ToString().Contains("легковая"))
-                        {
-                            ListBdCar.Add(new Lcar());
-                            ListBdCar[i].Serialize(reader);
-                        }
-                        else if (reader.GetValue(9).ToString().Contains("тягач"))
-                        {
-                            ListBdCar.Add(new Tyag());
-                            ListBdCar[i].Serialize(reader);
-                        }
-                        i++;
                     }
-                    
                 }
-                reader.Close();
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err);
-            }
-            finally
-            {
+                catch (InvalidOperationException err) //ошибка открытия
+                {
+                    Console.WriteLine(err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                catch (InvalidCastException err) //ошибка инициализации ридера
+                {
+                    Console.WriteLine(err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                catch (SqlException err) //отлов ошибок чтения и прочих ошибок sql
+                {
+                    Console.WriteLine(err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                catch (Exception err) //отлов всех ошибок
+                {
+                    Console.WriteLine(err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                finally
+                {
 
-                con.Close();
+                    con.Close();
+                }
             }
-
-            Console.WriteLine(); Console.WriteLine(); Console.WriteLine();
 
             foreach (Car n in ListBdCar)
             {
                 string ss = n.str();
                 Console.WriteLine(ss);
             }
-
             Console.ReadKey();
         }
     }   

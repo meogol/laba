@@ -4,41 +4,44 @@ namespace ConsoleApp1
 {
     class Car
     {
-        protected string typeCar { get; set; } = "машина";
-        /// <summary>
-        /// тип машины
-        /// </summary>
-        private float vdvig { get; set; }
+        //типы машин
+        protected enum typeCar { машина=0, легковая, грузовик, тягач };
         /// <summary>
         /// объем двигателя
         /// </summary>
-        private int kpos { get; set; }
+        private float vdvig { get; set; }
         /// <summary>
         /// кол-во посадочных мест
         /// </summary>
+        private int kpos { get; set; }
+        /// <summary>
+        /// тип машины
+        /// </summary>
+        protected typeCar tc { get; set; }
+
         public Car()
         {
+            tc = typeCar.машина;
             vdvig = 14;
             kpos = 6;
         }
 
-        public Car(float vdvig, int kpos, string typeCar)
+        public Car(float vdvig, int kpos)
         {
-            this.typeCar = typeCar;
+            tc = typeCar.машина;
             this.vdvig = vdvig;
             this.kpos = kpos;
         }
 
         public virtual void Serialize(SqlDataReader reader)
         {
-            typeCar = (string)reader.GetValue(9);
-            vdvig = (float)(double)reader.GetValue(1);
-            kpos = (int)reader.GetValue(2);
+            vdvig = (float)(double)reader["объем_дв"];
+            kpos = (int)reader["кво_мест"];
         }
 
         public virtual string str()
         {
-            string ss = $"тип машины {typeCar} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
+            string ss = $"тип машины {tc} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
             return ss;
         }
     }
