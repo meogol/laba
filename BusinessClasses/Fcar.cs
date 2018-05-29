@@ -15,24 +15,18 @@ namespace ConsoleApp1
 
         public Fcar() : base()
         {
-            tc = typeCar.грузовик;
+            tc = typeCar.fcar;
             mas = 2000;
             cc = 800;
         }
 
         public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
         {
-            tc = typeCar.грузовик;
+            tc = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }
 
-        public override void Serialize(SqlDataReader reader)
-        {
-            base.Serialize(reader);
-            mas = (int)reader["масса_авто"];
-            cc = (int)reader["грузоподъемность"];
-        }
 
         public override string str()
         {
