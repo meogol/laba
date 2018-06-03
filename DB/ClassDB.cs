@@ -7,12 +7,11 @@ namespace ConsoleApp1
 {
     public class ClassDB<T>
     {
-        protected List<T> ListBdCar = new List<T>();
 
         public virtual List<T> Load(string s)
         {
-
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString))
+            List<T> ListBdCar = new List<T>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString))
             {
                 try
                 {
@@ -34,12 +33,6 @@ namespace ConsoleApp1
                 catch (Exception err) //отлов всех ошибок
                 {
                     Console.WriteLine(err);
-                    Console.WriteLine(err.StackTrace);
-                }
-                finally
-                {
-
-                    con.Close();
                 }
             }
                 return ListBdCar;

@@ -1,11 +1,9 @@
-﻿using System.Data.SqlClient;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
     class Car
     {
         //типы машин
-        protected enum typeCar { car=0, lcar, fcar, tyag };
+        protected enum typeCar { car = 0, lcar, fcar, tyag };
         /// <summary>
         /// объем двигателя
         /// </summary>

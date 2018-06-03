@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using ConsoleApp1;
 
-namespace ConsoleApp3
+namespace ConsoleApp1
 {
     class Program
     {
+        enum typeCar { машина = 0, легковая, грузовик, тягач };
         static void Main(string[] args)
         {
-            var Str = new List<string>();
+            var Str = new List<typeCar>();
             var Cars = new List<Car>();
 
             DBtype t = new DBtype();
@@ -22,7 +23,7 @@ namespace ConsoleApp3
                 Console.WriteLine(n.str());
             }
             Console.WriteLine(); Console.WriteLine();
-            foreach (string n in Str)
+            foreach (typeCar n in Str)
             {
                 Console.WriteLine(n);
             }

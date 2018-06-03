@@ -1,6 +1,4 @@
-﻿using System.Data.SqlClient;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
     class Fcar : Car
     {
