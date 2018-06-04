@@ -25,24 +25,7 @@ namespace ConsoleApp1
             {
                 return tyag(reader);
             }
-            //switch (strok){
-            //    case "машина":
-            //        {
-                        
-            //        }
-            //    case "грузовик":
-            //        {
-                        
-            //        }
-            //    case "легковая":
-            //        {
-                       
-            //        }
-            //    case "тягач":
-            //        {
-                        
-            //        } 
-            //}
+            
             return null;
         }
 

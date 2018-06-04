@@ -6,26 +6,25 @@ namespace ConsoleApp1
 {
     class Program
     {
-        enum typeCar { машина = 0, легковая, грузовик, тягач };
         static void Main(string[] args)
         {
-            var Str = new List<typeCar>();
+            var Str = new List<Types>();
             var Cars = new List<Car>();
 
             DBtype t = new DBtype();
             DBcars c = new DBcars();
 
-            Str = t.Load("dbo_s");
-            Cars = c.Load("car");
+            Str = t.Load("SELECT * FROM dbo_s");
+            Cars = c.Load("SELECT * FROM car");
 
             foreach (Car n in Cars)
             {
                 Console.WriteLine(n.str());
             }
             Console.WriteLine(); Console.WriteLine();
-            foreach (typeCar n in Str)
+            foreach (Types n in Str)
             {
-                Console.WriteLine(n);
+                Console.WriteLine(n.str());
             }
             Console.ReadKey();
         }

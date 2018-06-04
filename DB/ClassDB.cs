@@ -16,8 +16,8 @@ namespace ConsoleApp1
                 try
                 {
                     con.Open();
-                    string sqlExpression = "SELECT * FROM "+s;//s указывает на открываемую бд
-                    using (SqlCommand command = new SqlCommand(sqlExpression, con))
+                    string sqlExpression = s;//s- передоваемый запрос
+                    using (var command = new SqlCommand(sqlExpression, con))
                     {
 
                         using (SqlDataReader reader = command.ExecuteReader())
