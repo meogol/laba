@@ -1,11 +1,10 @@
-﻿using System.Data.SqlClient;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
+    //типы машин
+    public enum typeCar { car = 0, lcar, fcar, tyag };
     class Car
     {
-        //типы машин
-        protected enum typeCar { машина=0, легковая, грузовик, тягач };
+        
         /// <summary>
         /// объем двигателя
         /// </summary>
@@ -21,22 +20,16 @@ namespace ConsoleApp1
 
         public Car()
         {
-            tc = typeCar.машина;
+            tc = typeCar.car;
             vdvig = 14;
             kpos = 6;
         }
 
         public Car(float vdvig, int kpos)
         {
-            tc = typeCar.машина;
+            tc = typeCar.car;
             this.vdvig = vdvig;
             this.kpos = kpos;
-        }
-
-        public virtual void Serialize(SqlDataReader reader)
-        {
-            vdvig = (float)(double)reader["объем_дв"];
-            kpos = (int)reader["кво_мест"];
         }
 
         public virtual string str()
