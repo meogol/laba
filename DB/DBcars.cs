@@ -4,66 +4,35 @@ namespace ConsoleApp1
 {
     class DBcars : ClassDB<Car>
     {
-        enum typeCar { машина = 0, легковая, грузовик, тягач };
 
         protected override Car Serialize(SqlDataReader reader)
         {
             string strok = reader["typeCar"].ToString();
 
-            if(strok== typeCar.машина.ToString())
+            if(strok== typeCar.car.ToString())
             {
-                return car(reader);
-            }else if(strok == typeCar.легковая.ToString())
+                SerCar n = new SerCar();
+                n.ser(reader);
+                return n.NewCar();
+            }else if(strok == typeCar.lcar.ToString())
             {
-               return lcar(reader);
+                SerLcar n = new SerLcar();
+                n.ser(reader);
+                return n.NewLcar();
             }
-            else if (strok == typeCar.грузовик.ToString())
+            else if (strok == typeCar.fcar.ToString())
             {
-                return fcar(reader);
+                SerFcar n = new SerFcar();
+                n.ser(reader);
+                return n.NewFcar();
             }
-            else if (strok == typeCar.тягач.ToString())
+            else if (strok == typeCar.tyag.ToString())
             {
-                return tyag(reader);
-            }
-            
+                SerTyag n = new SerTyag();
+                n.ser(reader);
+                return n.NewTyag();
+            }    
             return null;
         }
-
-        private Car car(SqlDataReader reader)
-        {
-            float vdvig = (float)(double)reader["vdvig"];
-            int kpos = (int)reader["kpos"];
-            return new Car(vdvig, kpos);
-        }
-
-        private Car fcar(SqlDataReader reader)
-        {
-            float vdvig = (float)(double)reader["vdvig"];
-            int kpos = (int)reader["kpos"];
-            int mas = (int)reader["mas"];
-            int cc = (int)reader["cc"];
-            return new Fcar(mas, cc, vdvig, kpos);
-        }
-
-        private Car lcar(SqlDataReader reader)
-        {
-            float vdvig = (float)(double)reader["vdvig"];
-            int kpos = (int)reader["kpos"];
-            float ras = (float)(double)reader["ras"];
-            int Mspeed = (int)reader["Mspeed"];
-            return new Lcar(ras, Mspeed, vdvig, kpos);
-        }
-
-        private Car tyag(SqlDataReader reader)
-        {
-            float vdvig = (float)(double)reader["vdvig"];
-            int kpos = (int)reader["kpos"];
-            int mas = (int)reader["mas"];
-            int cc = (int)reader["cc"];
-            int kPr = (int)reader["kPr"];
-            string typeDv = (string)reader["typeDv"];
-            return new Tyag(kPr, typeDv, mas, cc, vdvig, kpos);
-        }
-
     }
 }

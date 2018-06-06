@@ -1,9 +1,10 @@
 ﻿namespace ConsoleApp1
 {
+    //типы машин
+    public enum typeCar { car = 0, lcar, fcar, tyag };
     class Car
     {
-        //типы машин
-        protected enum typeCar { car = 0, lcar, fcar, tyag };
+        
         /// <summary>
         /// объем двигателя
         /// </summary>

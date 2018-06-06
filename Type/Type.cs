@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
     class Types
     {
         int id { get; set; }
-        enum typeCar { машина = 0, легковая, грузовик, тягач };
+        public enum typeCar { car = 0, lcar, fcar, tyag };
         typeCar tc { get; set; }
 
         public Types(int id, string str)
         {
             this.id = id;
 
-            if (str == typeCar.машина.ToString())
-                tc = typeCar.машина;
-            else if (str == typeCar.легковая.ToString())
-                tc = typeCar.легковая;
-            else if (str == typeCar.грузовик.ToString())
-                tc = typeCar.грузовик;
-            else if (str == typeCar.тягач.ToString())
-                tc = typeCar.тягач;
+            if (str == typeCar.car.ToString())
+                tc = typeCar.car;
+            else if (str == typeCar.lcar.ToString())
+                tc = typeCar.lcar;
+            else if (str == typeCar.fcar.ToString())
+                tc = typeCar.fcar;
+            else if (str == typeCar.tyag.ToString())
+                tc = typeCar.tyag;
         }
 
         public string str()
