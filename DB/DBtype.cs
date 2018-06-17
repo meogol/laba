@@ -6,10 +6,9 @@ namespace ConsoleApp1
     {        
         protected override Types Serialize(SqlDataReader reader)
         {
-            string sqlRead = reader["type_car"].ToString();
-            int sqlID = (int)reader["id"];
+            typeCar sqlRead = (typeCar)reader["type_car"];
 
-            return new Types(sqlID, sqlRead);
+            return new Types(sqlRead);
         }
     }
 }
