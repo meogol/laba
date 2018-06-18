@@ -24,7 +24,7 @@ namespace ConsoleApp1
                         {
                             while (reader.Read())
                             {
-                                ListBdCar.Add(Serialize(reader));
+                                ListBdCar.Add(Serialize(reader));  
                             }
                             reader.Close();
                         }
@@ -32,7 +32,7 @@ namespace ConsoleApp1
                 }
                 catch (Exception err) //отлов всех ошибок
                 {
-                    Console.WriteLine(err);
+                    throw new Exception("Ошибка при попытке выполнить Sql запрос: " + s, err);
                 }
             }
                 return ListBdCar;
