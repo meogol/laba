@@ -12,11 +12,7 @@
         int cc { get; set; }     
 
         public Fcar() : base()
-        {
-            tc = typeCar.fcar;
-            mas = 2000;
-            cc = 800;
-        }
+        {}
 
         public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
         {
@@ -25,6 +21,12 @@
             this.cc = cc;
         }
 
+        public void SetParam(int mas, int cc)
+        {
+            tc = typeCar.fcar;
+            this.mas = mas;
+            this.cc = cc;
+        }
 
         public override string str()
         {

@@ -5,66 +5,74 @@ namespace ConsoleApp1
 {
     class DBcars : ClassDB<Car>
     {
-        float vdvig;
-        int kpos;
-        int mas;
-        int cc;
-        float ras;
-        int Mspeed;
-        int kPr;
-        string typeDv;
+
+        public DBcars() {}
+
         protected override Car Serialize(SqlDataReader reader)
         {
             typeCar strok = (typeCar)reader["typeCar"];
             
             if(strok == typeCar.car)
             {
-                serCar(reader);
-                return new Car(vdvig, kpos);
+                Car c= new Car();
+                serCar(reader, c);
+                return c;
             }
             else if(strok == typeCar.lcar)
             {
-                serLcar(reader);
-                return new Lcar(ras, Mspeed, vdvig, kpos);
+                Lcar c = new Lcar();
+                serLcar(reader, c);
+                return c;
             }
             else if (strok == typeCar.fcar)
             {
-                serFcar(reader);
-                return new Fcar(mas, cc, vdvig, kpos );
+                Fcar f = new Fcar();
+                serFcar(reader, f);
+                return f;
             }
             else if (strok == typeCar.tyag)
             {
-                serTyag(reader);
-                return new Tyag(kPr, typeDv, mas, cc, vdvig, kpos);
+                Tyag t = new Tyag();
+                serTyag(reader, t);
+                return t;
             }    
             return null;
         }
 
-        public void serCar(SqlDataReader reader)
+        public void serCar(SqlDataReader reader, Car c)
         {
-            vdvig = (float)(double)reader["vdvig"];
-            kpos = (int)reader["kpos"];   
+            float vdvig = (float)(double)reader["vdvig"];
+            int kpos = (int)reader["kpos"];
+
+            c.SetParam(vdvig, kpos);
         }
 
-        public void serFcar(SqlDataReader reader)
+        public void serFcar(SqlDataReader reader, Fcar f)
         {
-            serCar(reader);
-            mas = (int)reader["mas"];
-            cc = (int)reader["cc"];
+            serCar(reader, f);
+            int mas = (int)reader["mas"];
+            int cc = (int)reader["cc"];
+
+            f.SetParam(mas, cc);
         }
 
-        public void serLcar(SqlDataReader reader)
+        public void serLcar(SqlDataReader reader, Lcar l)
         {
-            serCar(reader);
-            ras = (float)(double)reader["ras"];
-            Mspeed = (int)reader["Mspeed"];
+            serCar(reader, l);
+            float ras = (float)(double)reader["ras"];
+            int Mspeed = (int)reader["Mspeed"];
+
+            l.SetParam(ras, Mspeed);
         }
         
-        public void serTyag(SqlDataReader reader)
+        public void serTyag(SqlDataReader reader, Tyag t)
         {
-            serFcar(reader);
-            kPr = (int)reader["kPr"];
-            typeDv = (string)reader["typeDv"];
+            serFcar(reader, t);
+
+            int kPr = (int)reader["kPr"];
+            string typeDv = (string)reader["typeDv"];
+
+            t.SetParam(kPr, typeDv);
         }
     }
 }

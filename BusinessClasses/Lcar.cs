@@ -12,12 +12,15 @@
         int Mspeed { get; set; }      
 
         public Lcar() : base()
+        {}
+        public Lcar(float ras, int Mspeed, float vdvig, int kpo) : base(vdvig, kpo)
         {
             tc = typeCar.lcar;
-            ras = 20;
-            Mspeed = 120;
+            this.ras = ras;
+            this.Mspeed = Mspeed;
         }
-        public Lcar(float ras, int Mspeed, float vdvig, int kpo) : base(vdvig, kpo)
+
+        public void SetParam(float ras, int Mspeed)
         {
             tc = typeCar.lcar;
             this.ras = ras;

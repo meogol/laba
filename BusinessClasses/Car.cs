@@ -19,13 +19,16 @@
         protected typeCar tc { get; set; }
 
         public Car()
-        {
-            tc = typeCar.car;
-            vdvig = 14;
-            kpos = 6;
-        }
+        {}
 
         public Car(float vdvig, int kpos)
+        {
+            tc = typeCar.car;
+            this.vdvig = vdvig;
+            this.kpos = kpos;
+        }
+
+        public void SetParam(float vdvig, int kpos)
         {
             tc = typeCar.car;
             this.vdvig = vdvig;

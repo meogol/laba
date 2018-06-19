@@ -15,12 +15,16 @@ namespace ConsoleApp1
         string typeDv { get; set; }     
 
         public Tyag() : base()
-        {
-            tc = typeCar.tyag;
-            kPr = 1;
-            typeDv = "дизель";
-        }
+        {}
+
         public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo) : base(mas, cc, vdvig, kpo)
+        {
+            base.tc = typeCar.tyag;
+            this.kPr = kPr;
+            this.typeDv = typeDv;
+        }
+
+        public void SetParam(int kPr, string typeDv)
         {
             base.tc = typeCar.tyag;
             this.kPr = kPr;
