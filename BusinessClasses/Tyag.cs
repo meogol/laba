@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 
 namespace ConsoleApp1
 {
@@ -16,23 +15,20 @@ namespace ConsoleApp1
         string typeDv { get; set; }     
 
         public Tyag() : base()
-        {
-            tc = typeCar.тягач;
-            kPr = 1;
-            typeDv = "дизель";
-        }
+        {}
+
         public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo) : base(mas, cc, vdvig, kpo)
         {
-            base.tc = typeCar.тягач;
+            base.tc = typeCar.tyag;
             this.kPr = kPr;
             this.typeDv = typeDv;
         }
 
-        public override void Serialize(SqlDataReader reader)
+        public void SetParam(int kPr, string typeDv)
         {
-            base.Serialize(reader);
-            kPr = (int)reader["кво_приц"];
-            typeDv = (string)reader["тип_двиг"];
+            base.tc = typeCar.tyag;
+            this.kPr = kPr;
+            this.typeDv = typeDv;
         }
 
         public override string str()

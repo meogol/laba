@@ -1,6 +1,4 @@
-﻿using System.Data.SqlClient;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
     class Fcar : Car
     {
@@ -14,24 +12,20 @@ namespace ConsoleApp1
         int cc { get; set; }     
 
         public Fcar() : base()
-        {
-            tc = typeCar.грузовик;
-            mas = 2000;
-            cc = 800;
-        }
+        {}
 
         public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
         {
-            tc = typeCar.грузовик;
+            tc = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }
 
-        public override void Serialize(SqlDataReader reader)
+        public void SetParam(int mas, int cc)
         {
-            base.Serialize(reader);
-            mas = (int)reader["масса_авто"];
-            cc = (int)reader["грузоподъемность"];
+            tc = typeCar.fcar;
+            this.mas = mas;
+            this.cc = cc;
         }
 
         public override string str()
