@@ -1,3 +1,4 @@
+/*8) Запрос выводит менеджеров, чьи склады обслуживюат более одного магазина.*/
 select
 	(SELECT count(stock_ID)
 	from stock_magazine

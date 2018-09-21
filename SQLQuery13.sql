@@ -1,3 +1,4 @@
+/*	9) Вывести топ 3 менеджеров на чьих складах большего количества товаров.*/
 select (select FIO
 				from manager
 				where ID=manager_stock.manager_ID) as FIO,
