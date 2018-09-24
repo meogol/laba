@@ -1,10 +1,11 @@
-/*8) Çàïðîñ âûâîäèò ìåíåäæåðîâ, ÷üè ñêëàäû îáñëóæèâþàò áîëåå îäíîãî ìàãàçèíà.*/
-select
-	(SELECT count(stock_ID)
-	from stock_magazine
-	group by stock_ID
-	having stock_ID=manager_stock.stock_ID and count(stock_ID)>1) as magazine,
-	(select FIO
-	from manager
-	where ID=manager_stock.manager_ID)
-from manager_stock
+ï»¿/*8) Ð—Ð°Ð¿Ñ€Ð¾Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€Ð¾Ð², Ñ‡ÑŒÐ¸ ÑÐºÐ»Ð°Ð´Ñ‹ Ð¾Ð±ÑÐ»ÑƒÐ¶Ð¸Ð²ÑŽÐ°Ñ‚ Ð±Ð¾Ð»ÐµÐµ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð¼Ð°Ð³Ð°Ð·Ð¸Ð½Ð°.*/
+
+select (select FIO
+		from manager
+		where ID=manager_stock.manager_ID) as FIO,
+		 COUNT(magazine_ID) as [count magazine]
+from stock_magazine inner join manager_stock
+on stock_magazine.stock_ID=manager_stock.stock_ID
+group by manager_ID
+having COUNT(magazine_ID)>1
+

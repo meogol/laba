@@ -1,6 +1,10 @@
-/*6) Çàïðîñ âûâîäèò ìèíèìàëüíóþ öåíó äëÿ êàæäîãî òèïà òîâàðà ñóììà öåí,
-áîëüøå 1000*/
-SELECT type_product_ID, min(price) as min
-from product, [type product]
+ï»¿/*6) Ð—Ð°Ð¿Ñ€Ð¾Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½ÑƒÑŽ Ñ†ÐµÐ½Ñƒ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ñ‚Ð¸Ð¿Ð° Ñ‚Ð¾Ð²Ð°Ñ€Ð° ÑÑƒÐ¼Ð¼Ð° Ñ†ÐµÐ½,
+Ð±Ð¾Ð»ÑŒÑˆÐµ 1000*/
+SELECT min(price) as [min price], 
+(select Info
+from [type product]
+where [type product].ID=product.type_product_ID) as type
+from product inner join [type product]
+on type_product_ID=[type product].ID
 group by type_product_ID
 HAVING SUM(price) > 1000
