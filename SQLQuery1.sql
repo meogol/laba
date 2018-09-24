@@ -1,4 +1,7 @@
-SELECT manager_ID, COUNT(stock_ID)
+п»їSELECT (select FIO
+		from manager
+		where ID=manager_ID),
+ COUNT(stock_ID) as stock
 from manager_stock
 group by manager_ID
-/*	7) Запрос выводит количество складов для каждого менеджера*/
+/*	7) Р—Р°РїСЂРѕСЃ РІС‹РІРѕРґРёС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРєР»Р°РґРѕРІ РґР»СЏ РєР°Р¶РґРѕРіРѕ РјРµРЅРµРґР¶РµСЂР°*/
