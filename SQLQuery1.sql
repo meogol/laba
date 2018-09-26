@@ -1,7 +1,8 @@
-﻿SELECT (select FIO
-		from manager
-		where ID=manager_ID),
- COUNT(stock_ID) as stock
+﻿SELECT FIO, stock
+from manager
+inner join (select COUNT(stock_ID) as stock,
+manager_ID
 from manager_stock
-group by manager_ID
+group by manager_ID) as t1
+on ID=manager_ID
 /*	7) Запрос выводит количество складов для каждого менеджера*/
