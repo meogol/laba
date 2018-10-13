@@ -13,7 +13,7 @@
 
         public Lcar() : base()
         {}
-        public Lcar(float ras, int Mspeed, float vdvig, int kpo) : base(vdvig, kpo)
+        public Lcar(float ras, int Mspeed, float vdvig, int kpo, int id) : base(vdvig, kpo,id)
         {
             tc = typeCar.lcar;
             this.ras = ras;

@@ -2,13 +2,14 @@
 
 namespace ConsoleApp1
 {
-    class DBtype : ClassDB<Types>
+    class DBtype : CachedRepositary<Types>
     {        
         protected override Types Serialize(SqlDataReader reader)
         {
             typeCar sqlRead = (typeCar)reader["type_car"];
+            int id=(int)reader["ID"];
 
-            return new Types(sqlRead);
+            return new Types(id,sqlRead);
         }
     }
 }
