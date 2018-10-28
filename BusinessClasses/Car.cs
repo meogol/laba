@@ -19,7 +19,7 @@
         /// <summary>
         /// тип машины
         /// </summary>
-        protected typeCar tc { get; set; }
+        public typeCar tc { get; set; }
 
         public Car()
         {}

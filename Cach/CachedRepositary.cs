@@ -1,24 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
     class CachedRepositary<T>:BaseRepository<T> where T:IIntegerKey
     {
-        int idCache = 0;
+
         protected Dictionary<int, T> cache = new Dictionary<int, T>();
         
         public T LoadById(int id)
         {
-            foreach(T i in cache.Values)
+            if (cache.ContainsKey(id))
             {
-                if (i.ID == id)
-                {
-                    return i;
-                }
+                return cache[id];
             }
+
             List<T> list = Load($"SELECT * FROM car WHERE ID={id}");
-            cache.Add(idCache++, list[0]);
-            return list[0];
+            if (list.Count > 0)
+            {
+                return list[0];
+            }
+            else return default(T);
         }
         
         public override List<T> Load(string s)
@@ -27,12 +29,24 @@ namespace ConsoleApp1
 
             foreach (T tList in list)
             {
-                if (!cache.ContainsValue(tList))//проверяем, есть ли элемент в кэше
+                if (!cache.ContainsKey(tList.ID))//проверяем, есть ли элемент в кэше
                 {
-                    cache.Add(idCache, tList);
-                    idCache++;
+                    cache.Add(tList.ID, tList);
                 }
             }
+            return list;
+        }
+
+        public List<T> LoadFromCacheByLinq(Predicate<T> predicate)
+        {
+            List<T> list = new List<T>();
+
+            foreach (T t in cache.Values)
+            {
+                if(predicate(t))
+                    list.Add(t);
+            }
+
             return list;
         }
     }

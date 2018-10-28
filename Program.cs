@@ -44,7 +44,10 @@ namespace ConsoleApp1
                         {
                             Console.WriteLine("Введите ID искомого эллемента");
                             int id = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine(c.LoadById(id).str());
+                            if (c.LoadById(id) != null)
+                                Console.WriteLine(c.LoadById(id).str());
+                            else
+                                Console.WriteLine("указанного значения не существует");
                             break;
                         }
                     case 3:
@@ -52,7 +55,9 @@ namespace ConsoleApp1
                             string s;
                             Console.WriteLine("Введите строку");
                             s=Console.ReadLine();
-                            foreach (Car car in c.LoadFromCacheByLinq(s))
+
+                            Predicate<Car> predicate = delegate (Car car) { return car.str().Contains(s); };
+                            foreach (Car car in c.LoadFromCacheByLinq(predicate))
                             {
                                 Console.WriteLine(car.str());
                             }

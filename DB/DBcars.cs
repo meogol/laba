@@ -41,15 +41,7 @@ namespace ConsoleApp1
             }    
             return null;
         }
-
-        public List<Car> LoadFromCacheByLinq(string s)
-        {
-            var selected = (from T in cache.Values
-                                 where T.str().Contains(s)
-                                 select T).ToList();
-
-            return selected;
-        }
+        
 
         public void serCar(SqlDataReader reader, Car c)
         {
