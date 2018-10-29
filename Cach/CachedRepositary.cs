@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -10,17 +11,14 @@ namespace ConsoleApp1
         
         public T LoadById(int id)
         {
-            if (cache.ContainsKey(id))
+            
+            if (cache.TryGetValue(id, out T value))
             {
-                return cache[id];
+                return value;
             }
 
             List<T> list = Load($"SELECT * FROM car WHERE ID={id}");
-            if (list.Count > 0)
-            {
-                return list[0];
-            }
-            else return default(T);
+            return list.FirstOrDefault();
         }
         
         public override List<T> Load(string s)
@@ -37,16 +35,10 @@ namespace ConsoleApp1
             return list;
         }
 
-        public List<T> LoadFromCacheByLinq(Predicate<T> predicate)
+        public List<T> LoadFromCacheByLinq(Func<T,bool> predicate)
         {
-            List<T> list = new List<T>();
-
-            foreach (T t in cache.Values)
-            {
-                if(predicate(t))
-                    list.Add(t);
-            }
-
+            List<T> list = cache.Values.Where(predicate).ToList();
+            
             return list;
         }
     }

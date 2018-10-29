@@ -55,9 +55,8 @@ namespace ConsoleApp1
                             string s;
                             Console.WriteLine("Введите строку");
                             s=Console.ReadLine();
-
-                            Predicate<Car> predicate = delegate (Car car) { return car.str().Contains(s); };
-                            foreach (Car car in c.LoadFromCacheByLinq(predicate))
+                            
+                            foreach (Car car in c.LoadFromCacheByLinq(Pcar => Pcar.str().Contains(s)))
                             {
                                 Console.WriteLine(car.str());
                             }
