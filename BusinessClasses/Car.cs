@@ -2,9 +2,12 @@
 {
     //типы машин
     public enum typeCar { car = 0, lcar, fcar, tyag };
-    class Car
+    class Car: IIntegerKey
     {
-        
+        /// <summary>
+        /// ID эллемента
+        /// </summary>
+        public int ID { get; set; }
         /// <summary>
         /// объем двигателя
         /// </summary>
@@ -16,20 +19,22 @@
         /// <summary>
         /// тип машины
         /// </summary>
-        protected typeCar tc { get; set; }
+        public typeCar tc { get; set; }
 
         public Car()
         {}
 
-        public Car(float vdvig, int kpos)
+        public Car(float vdvig, int kpos, int id)
         {
+            ID = id;
             tc = typeCar.car;
             this.vdvig = vdvig;
             this.kpos = kpos;
         }
 
-        public void SetParam(float vdvig, int kpos)
+        public void SetParam(float vdvig, int kpos, int id)
         {
+            ID = id;
             tc = typeCar.car;
             this.vdvig = vdvig;
             this.kpos = kpos;
@@ -37,7 +42,7 @@
 
         public virtual string str()
         {
-            string ss = $"тип машины {tc} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
+            string ss = $"ID-{ID} тип машины {tc} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
             return ss;
         }
     }

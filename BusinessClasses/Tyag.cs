@@ -17,7 +17,7 @@ namespace ConsoleApp1
         public Tyag() : base()
         {}
 
-        public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo) : base(mas, cc, vdvig, kpo)
+        public Tyag(int kPr, string typeDv, int mas, int cc, float vdvig, int kpo, int id) : base(mas, cc, vdvig, kpo,id)
         {
             base.tc = typeCar.tyag;
             this.kPr = kPr;

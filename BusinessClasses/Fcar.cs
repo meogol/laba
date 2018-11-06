@@ -14,7 +14,7 @@
         public Fcar() : base()
         {}
 
-        public Fcar(int mas, int cc, float vdvig, int kpos) : base(vdvig, kpos)
+        public Fcar(int mas, int cc, float vdvig, int kpos,int id) : base(vdvig, kpos, id)
         {
             tc = typeCar.fcar;
             this.mas = mas;

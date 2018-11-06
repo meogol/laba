@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace ConsoleApp1
 {
-    class DBcars : ClassDB<Car>
+    class DBcars : CachedRepositary<Car>
     {
 
         public DBcars() {}
@@ -12,7 +14,8 @@ namespace ConsoleApp1
         {
             typeCar strok = (typeCar)reader["typeCar"];
             
-            if(strok == typeCar.car)
+
+            if (strok == typeCar.car)
             {
                 Car c= new Car();
                 serCar(reader, c);
@@ -38,13 +41,15 @@ namespace ConsoleApp1
             }    
             return null;
         }
+        
 
         public void serCar(SqlDataReader reader, Car c)
         {
+            int id = (int)reader["ID"];
             float vdvig = (float)(double)reader["vdvig"];
             int kpos = (int)reader["kpos"];
 
-            c.SetParam(vdvig, kpos);
+            c.SetParam(vdvig, kpos, id);
         }
 
         public void serFcar(SqlDataReader reader, Fcar f)
