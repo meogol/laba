@@ -21,8 +21,8 @@ namespace ConsoleApp1
 
             Console.WriteLine(); Console.WriteLine();
 
-            DBcars c = new DBcars();
-
+            CachedRepositary<Car> c = new CachedRepositary<Car>();
+            
             int i;
             while (true)
             {

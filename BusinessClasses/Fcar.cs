@@ -1,29 +1,32 @@
-﻿namespace ConsoleApp1
+﻿using System;
+
+namespace ConsoleApp1
 {
+    
     class Fcar : Car
     {
         /// <summary>
         /// масса авто
         /// </summary>
-        int mas { get; set; } 
+        public int mas { get; set; }
         /// <summary>
         /// грузоподъемность
         /// </summary>
-        int cc { get; set; }     
+        public int cc { get; set; }     
 
         public Fcar() : base()
         {}
 
-        public Fcar(int mas, int cc, float vdvig, int kpos,int id) : base(vdvig, kpos, id)
+        public Fcar(object mas, object cc, object id, object vdvig, object kpos) : base(id,vdvig, kpos)
         {
-            tc = typeCar.fcar;
-            this.mas = mas;
-            this.cc = cc;
+            typeCar = typeCar.fcar;
+            this.mas = (int)mas;
+            this.cc = (int)cc;
         }
 
         public void SetParam(int mas, int cc)
         {
-            tc = typeCar.fcar;
+            typeCar = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }
