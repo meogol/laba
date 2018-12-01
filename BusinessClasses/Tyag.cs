@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1
 {
-    
+    [Serializable]
     class Tyag : Fcar
     {
         /// <summary>
@@ -17,16 +17,16 @@ namespace ConsoleApp1
         public Tyag() : base()
         {}
 
-        public Tyag(object kPr, object typeDv, object mas, object cc, object id, object vdvig, object kpos) : base(mas, cc, id, vdvig, kpos)
+        public Tyag(int kPr, string typeDv, int mas, int cc, int id, double vdvig, int kpos) : base(mas, cc, id, vdvig, kpos)
         {
-            base.typeCar = typeCar.tyag;
-            this.kPr = (int)kPr;
-            this.typeDv = typeDv.ToString();
+            base.tc = typeCar.tyag;
+            this.kPr = kPr;
+            this.typeDv = typeDv;
         }
 
         public void SetParam(int kPr, string typeDv)
         {
-            base.typeCar = typeCar.tyag;
+            base.tc = typeCar.tyag;
             this.kPr = kPr;
             this.typeDv = typeDv;
         }

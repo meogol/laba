@@ -1,14 +1,11 @@
-﻿using System;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
-    
     class Lcar : Car
     {
         /// <summary>
         /// расход
         /// </summary>
-        public float ras { get; set; }
+        public double ras { get; set; }
         /// <summary>
         /// макс скорость
         /// </summary>
@@ -16,16 +13,16 @@ namespace ConsoleApp1
 
         public Lcar() : base()
         {}
-        public Lcar(object ras, object Mspeed, object id, object vdvig, object kpos ) : base(id,vdvig, kpos)
+        public Lcar(float ras, int Mspeed, int id, double vdvig, int kpos) : base(id, vdvig, kpos)
         {
-            typeCar = typeCar.lcar;
-            this.ras = (float)(double)ras;
-            this.Mspeed = (int)Mspeed;
+            tc = typeCar.lcar;
+            this.ras = ras;
+            this.Mspeed = Mspeed;
         }
 
         public void SetParam(float ras, int Mspeed)
         {
-            typeCar = typeCar.lcar;
+            tc = typeCar.lcar;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }

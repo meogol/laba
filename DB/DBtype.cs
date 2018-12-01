@@ -9,7 +9,7 @@ namespace ConsoleApp1
             typeCar sqlRead = (typeCar)reader["type_car"];
             int id=(int)reader["ID"];
 
-            return new Types(id,sqlRead);
+            return new Types(id,(int)sqlRead);
         }
     }
 }

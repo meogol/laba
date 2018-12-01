@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace ConsoleApp1
+﻿namespace ConsoleApp1
 {
-    
     class Fcar : Car
     {
         /// <summary>
@@ -17,16 +14,16 @@ namespace ConsoleApp1
         public Fcar() : base()
         {}
 
-        public Fcar(object mas, object cc, object id, object vdvig, object kpos) : base(id,vdvig, kpos)
+        public Fcar(int mas, int cc, int id, double vdvig, int kpos) : base(id, vdvig, kpos)
         {
-            typeCar = typeCar.fcar;
-            this.mas = (int)mas;
-            this.cc = (int)cc;
+            tc = typeCar.fcar;
+            this.mas = mas;
+            this.cc = cc;
         }
 
         public void SetParam(int mas, int cc)
         {
-            typeCar = typeCar.fcar;
+            tc = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }

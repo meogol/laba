@@ -11,7 +11,7 @@ namespace ConsoleApp1
             var Cars = new List<Car>();
 
             var Str = new List<Types>();
-            DBtype t = new DBtype();
+            BaseRepository<Types> t = new BaseRepository<Types>();
 
             Str = t.Load("SELECT * FROM dbo_s");
             foreach (Types n in Str)
@@ -22,7 +22,7 @@ namespace ConsoleApp1
             Console.WriteLine(); Console.WriteLine();
 
             CachedRepositary<Car> c = new CachedRepositary<Car>();
-            
+
             int i;
             while (true)
             {
