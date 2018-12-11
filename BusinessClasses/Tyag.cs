@@ -17,16 +17,16 @@ namespace ConsoleApp1
         public Tyag() : base()
         {}
 
-        public Tyag(int kPr, string typeDv, int mas, int cc, int id, double vdvig, int kpos) : base(mas, cc, id, vdvig, kpos)
+        public Tyag(int kPr, string typeDv, int mas, int cc, double vdvig, int kpo, int id) : base(mas, cc, vdvig, kpo,id)
         {
-            base.tc = typeCar.tyag;
+            base.typeCar = typeCar.tyag;
             this.kPr = kPr;
             this.typeDv = typeDv;
         }
 
         public void SetParam(int kPr, string typeDv)
         {
-            base.tc = typeCar.tyag;
+            base.typeCar = typeCar.tyag;
             this.kPr = kPr;
             this.typeDv = typeDv;
         }

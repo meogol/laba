@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class BaseRepository<T> where T : IIntegerKey
+    class BaseRepository<T>
     {
 
         public virtual List<T> Load(string s)
@@ -31,6 +31,7 @@ namespace ConsoleApp1
                             }
                             reader.Close();
                         }
+                        
                     }
                 }
                 catch (Exception err) //отлов всех ошибок
@@ -41,51 +42,46 @@ namespace ConsoleApp1
             return ListBdCar;
         }
 
-        protected virtual T Serialize(SqlDataReader reader)//считываем и создаем новый эллемент
+        protected virtual T Serialize(SqlDataReader reader)
         {
-            Assembly asm = Assembly.LoadFrom("ConsoleApp2.exe");
-
-            Type[] allTypes = asm.GetTypes();
-
-            foreach (Type temp in allTypes)
-            {
-                if (IsEqually(temp.GetProperties(), reader) && temp.IsInterface == false)
+            IEnumerable<Type> list = Assembly.GetAssembly(typeof(T)).GetTypes().Where(type => type.IsSubclassOf(typeof(T)));
+            //пытаемся получить лист наследников, если он не поустой, ищем нужного
+            if (list.LastOrDefault() != null)
+                foreach (Type itm in list)
                 {
-                    List<object> list = new List<object>();
-
-                    foreach (PropertyInfo prop in temp.GetProperties())
+                    if (IsEqually(itm, reader))
                     {
-                        list.Add(reader[prop.Name]);
+                        return AddList(reader, itm);
                     }
-
-                    return (T)Activator.CreateInstance(temp, list.ToArray());
+                }
+            return AddList(reader, typeof(T));
+        }
+        
+        private bool IsEqually(Type type, SqlDataReader reader)//проверяет заполнение столбцов, одноименных для пропертей(служит для определения нужного наследника)
+        {
+            bool a = true;
+            foreach (PropertyInfo prop in type.GetProperties())
+            {
+                if (reader[prop.Name]== DBNull.Value)
+                {
+                    a = false;
+                    break;
                 }
             }
-            return default(T);
+
+            return a;
         }
 
-       
-        private bool IsEqually(PropertyInfo[] properties, SqlDataReader reader)
+        private T AddList(SqlDataReader reader, Type type)
         {
-            int count = 0;
-            bool a = false;
-            foreach (PropertyInfo prop in properties)
+            T t=(T)Activator.CreateInstance(type);
+            
+            foreach (PropertyInfo itm in t.GetType().GetProperties())
             {
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    if (reader.GetName(i) == prop.Name && prop.Name != "typeCar")
-                    {
-                        count++;
-                        a = true;
-                        break;
-                    }
-                    else
-                        a = false;
-                }
+                itm.SetValue(t, reader[itm.Name]);
             }
-            if (count < properties.Count())
-                a = false;
-            return a;
+
+            return t;
         }
 
     }

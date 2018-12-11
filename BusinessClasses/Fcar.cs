@@ -14,16 +14,16 @@
         public Fcar() : base()
         {}
 
-        public Fcar(int mas, int cc, int id, double vdvig, int kpos) : base(id, vdvig, kpos)
+        public Fcar(int mas, int cc, double vdvig, int kpos,int id) : base(vdvig, kpos, id)
         {
-            tc = typeCar.fcar;
+            typeCar = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }
 
         public void SetParam(int mas, int cc)
         {
-            tc = typeCar.fcar;
+            typeCar = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }

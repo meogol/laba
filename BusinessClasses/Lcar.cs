@@ -13,16 +13,16 @@
 
         public Lcar() : base()
         {}
-        public Lcar(float ras, int Mspeed, int id, double vdvig, int kpos) : base(id, vdvig, kpos)
+        public Lcar(double ras, int Mspeed, double vdvig, int kpo, int id) : base(vdvig, kpo,id)
         {
-            tc = typeCar.lcar;
+            typeCar = typeCar.lcar;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }
 
-        public void SetParam(float ras, int Mspeed)
+        public void SetParam(double ras, int Mspeed)
         {
-            tc = typeCar.lcar;
+            typeCar = typeCar.lcar;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }

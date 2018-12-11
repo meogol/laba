@@ -11,6 +11,7 @@ namespace ConsoleApp1
             var Cars = new List<Car>();
 
             var Str = new List<Types>();
+
             BaseRepository<Types> t = new BaseRepository<Types>();
 
             Str = t.Load("SELECT * FROM dbo_s");
@@ -23,15 +24,15 @@ namespace ConsoleApp1
 
             CachedRepositary<Car> c = new CachedRepositary<Car>();
 
-            int i;
+            char i;
             while (true)
             {
                 Console.WriteLine("1-Load   2-LoadID    3-LoadIDLinq    4-Clear");
-                i = Convert.ToInt32(Console.ReadKey().KeyChar.ToString());
+                i = Console.ReadKey().KeyChar;
                 Console.WriteLine();
                 switch (i)
                 {
-                    case 1:
+                    case '1':
                         {
                             Cars = c.Load("SELECT * FROM car");
                             foreach (Car n in Cars)
@@ -40,7 +41,7 @@ namespace ConsoleApp1
                             }
                             break;
                         }
-                    case 2:
+                    case '2':
                         {
                             Console.WriteLine("Введите ID искомого эллемента");
                             int id = Convert.ToInt32(Console.ReadLine());
@@ -50,7 +51,7 @@ namespace ConsoleApp1
                                 Console.WriteLine("указанного значения не существует");
                             break;
                         }
-                    case 3:
+                    case '3':
                         {
                             string s;
                             Console.WriteLine("Введите строку");
@@ -63,7 +64,7 @@ namespace ConsoleApp1
                             
                             break;
                         }
-                    case 4:
+                    case '4':
                         {
                             Console.Clear();
                             break;
