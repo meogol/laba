@@ -22,7 +22,7 @@ namespace ConsoleApp1
 
             Console.WriteLine(); Console.WriteLine();
 
-            CachedRepositary<Car> c = new CachedRepositary<Car>();
+            DBcars c = new DBcars();
 
             char i;
             while (true)

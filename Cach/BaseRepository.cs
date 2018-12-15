@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,9 @@ namespace ConsoleApp1
                 }
                 catch (Exception err) //отлов всех ошибок
                 {
+                    Console.WriteLine(err.StackTrace);
+                    Console.WriteLine(err.Message);
+                    Console.WriteLine(err.HelpLink);
                     throw new Exception("Ошибка при попытке выполнить Sql запрос: " + s, err);
                 }
             }
@@ -44,44 +48,28 @@ namespace ConsoleApp1
 
         protected virtual T Serialize(SqlDataReader reader)
         {
-            IEnumerable<Type> list = Assembly.GetAssembly(typeof(T)).GetTypes().Where(type => type.IsSubclassOf(typeof(T)));
-            //пытаемся получить лист наследников, если он не поустой, ищем нужного
-            if (list.LastOrDefault() != null)
-                foreach (Type itm in list)
-                {
-                    if (IsEqually(itm, reader))
-                    {
-                        return AddList(reader, itm);
-                    }
-                }
             return AddList(reader, typeof(T));
         }
         
-        private bool IsEqually(Type type, SqlDataReader reader)//проверяет заполнение столбцов, одноименных для пропертей(служит для определения нужного наследника)
-        {
-            bool a = true;
-            foreach (PropertyInfo prop in type.GetProperties())
-            {
-                if (reader[prop.Name]== DBNull.Value)
-                {
-                    a = false;
-                    break;
-                }
-            }
-
-            return a;
-        }
-
-        private T AddList(SqlDataReader reader, Type type)
+        protected T AddList(SqlDataReader reader, Type type)
         {
             T t=(T)Activator.CreateInstance(type);
             
             foreach (PropertyInfo itm in t.GetType().GetProperties())
             {
-                itm.SetValue(t, reader[itm.Name]);
+                if (ColumnExists(reader, itm.Name))
+                {
+                    itm.SetValue(t, reader[itm.Name]);
+                }
             }
 
             return t;
+            
+        }
+
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            return reader.GetSchemaTable().Rows.OfType<DataRow>().Any(row => row["ColumnName"].ToString() == columnName);
         }
 
     }
