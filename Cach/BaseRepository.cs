@@ -26,9 +26,10 @@ namespace ConsoleApp1
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            
                             while (reader.Read())
                             {
-                                ListBdCar.Add(Serialize(reader));
+                                ListBdCar.Add(Serialize(reader, typeof(T)));
                             }
                             reader.Close();
                         }
@@ -37,39 +38,35 @@ namespace ConsoleApp1
                 }
                 catch (Exception err) //отлов всех ошибок
                 {
-                    Console.WriteLine(err.StackTrace);
-                    Console.WriteLine(err.Message);
-                    Console.WriteLine(err.HelpLink);
+                    Console.WriteLine(err.ToString());
                     throw new Exception("Ошибка при попытке выполнить Sql запрос: " + s, err);
                 }
             }
             return ListBdCar;
         }
 
-        protected virtual T Serialize(SqlDataReader reader)
+        protected virtual T Serialize(SqlDataReader reader, Type type)
         {
-            return AddList(reader, typeof(T));
-        }
-        
-        protected T AddList(SqlDataReader reader, Type type)
-        {
-            T t=(T)Activator.CreateInstance(type);
-            
+            T t = (T)Activator.CreateInstance(type);
+
             foreach (PropertyInfo itm in t.GetType().GetProperties())
             {
-                if (ColumnExists(reader, itm.Name))
-                {
-                    itm.SetValue(t, reader[itm.Name]);
-                }
+                itm.SetValue(t, reader[itm.Name]);
+                
             }
 
             return t;
-            
         }
-
+        
         public bool ColumnExists(IDataReader reader, string columnName)
         {
-            return reader.GetSchemaTable().Rows.OfType<DataRow>().Any(row => row["ColumnName"].ToString() == columnName);
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i) == columnName)
+                    return true;
+            }
+
+            return false;
         }
 
     }

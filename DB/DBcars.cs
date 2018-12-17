@@ -9,26 +9,26 @@ namespace ConsoleApp1
     {
         public DBcars() {}
 
-        protected override Car Serialize(SqlDataReader reader)
+        protected override Car Serialize(SqlDataReader reader, Type t)
         {
             typeCar strok = (typeCar)reader["typeCar"];
             if (strok == typeCar.car)
             {
-                return AddList(reader, typeof(Car));
+                t=typeof(Car);
             }
             else if(strok == typeCar.lcar)
             {
-                return AddList(reader, typeof(Lcar));
+                t=typeof(Lcar);
             }
             else if (strok == typeCar.fcar)
             {
-                return AddList(reader, typeof(Fcar));
+                t=typeof(Fcar);
             }
             else if (strok == typeCar.tyag)
             {
-                return AddList(reader, typeof(Tyag));
+                t=typeof(Tyag);
             }    
-            return null;
+            return base.Serialize(reader, t);
         }
     }
 }
