@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace ConsoleApp1
 {
-    class CachedRepositary<T>:BaseRepository<T> where T:IIntegerKey
+    class CachedRepositary<T>:BaseRepository<T> where T:IIntegerKey, new ()
     {
 
-        protected Dictionary<int, T> cache = new Dictionary<int, T>();
+        private Dictionary<int, T> cache = new Dictionary<int, T>();
         
         public T LoadById(int id)
         {

@@ -5,24 +5,24 @@
         /// <summary>
         /// расход
         /// </summary>
-        float ras { get; set; }
+        public double ras { get; set; }
         /// <summary>
         /// макс скорость
         /// </summary>
-        int Mspeed { get; set; }      
+        public int Mspeed { get; set; }      
 
         public Lcar() : base()
         {}
-        public Lcar(float ras, int Mspeed, float vdvig, int kpo, int id) : base(vdvig, kpo,id)
+        public Lcar(double ras, int Mspeed, double vdvig, int kpo, int id) : base(vdvig, kpo,id)
         {
-            tc = typeCar.lcar;
+            typeCar = typeCar.lcar;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }
 
-        public void SetParam(float ras, int Mspeed)
+        public void SetParam(double ras, int Mspeed)
         {
-            tc = typeCar.lcar;
+            typeCar = typeCar.lcar;
             this.ras = ras;
             this.Mspeed = Mspeed;
         }

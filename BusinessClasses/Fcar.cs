@@ -5,25 +5,25 @@
         /// <summary>
         /// масса авто
         /// </summary>
-        int mas { get; set; } 
+        public int mas { get; set; }
         /// <summary>
         /// грузоподъемность
         /// </summary>
-        int cc { get; set; }     
+        public int cc { get; set; }     
 
         public Fcar() : base()
         {}
 
-        public Fcar(int mas, int cc, float vdvig, int kpos,int id) : base(vdvig, kpos, id)
+        public Fcar(int mas, int cc, double vdvig, int kpos,int id) : base(vdvig, kpos, id)
         {
-            tc = typeCar.fcar;
+            typeCar = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }
 
         public void SetParam(int mas, int cc)
         {
-            tc = typeCar.fcar;
+            typeCar = typeCar.fcar;
             this.mas = mas;
             this.cc = cc;
         }

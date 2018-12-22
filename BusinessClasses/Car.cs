@@ -11,38 +11,38 @@
         /// <summary>
         /// объем двигателя
         /// </summary>
-        private float vdvig { get; set; }
+        public double vdvig { get; set; }
         /// <summary>
         /// кол-во посадочных мест
         /// </summary>
-        private int kpos { get; set; }
+        public int kpos { get; set; }
         /// <summary>
         /// тип машины
         /// </summary>
-        public typeCar tc { get; set; }
+        public typeCar typeCar { get; set; }
 
         public Car()
         {}
 
-        public Car(float vdvig, int kpos, int id)
+        public Car(double vdvig, int kpos, int id)
         {
             ID = id;
-            tc = typeCar.car;
+            typeCar = typeCar.car;
             this.vdvig = vdvig;
             this.kpos = kpos;
         }
 
-        public void SetParam(float vdvig, int kpos, int id)
+        public void SetParam(double vdvig, int kpos, int id)
         {
             ID = id;
-            tc = typeCar.car;
+            typeCar = typeCar.car;
             this.vdvig = vdvig;
             this.kpos = kpos;
         }
 
         public virtual string str()
         {
-            string ss = $"ID-{ID} тип машины {tc} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
+            string ss = $"ID-{ID} тип машины {typeCar} объем двигателя {vdvig} кол-во посадочных мест {kpos}"; 
             return ss;
         }
     }

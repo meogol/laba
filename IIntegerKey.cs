@@ -9,5 +9,6 @@ namespace ConsoleApp1
     interface IIntegerKey
     {
        int ID { get; set; }
+       string str(); 
     }
 }
